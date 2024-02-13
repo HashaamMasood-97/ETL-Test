@@ -1,4 +1,4 @@
-# ETL
+# ETL TASK
 
 This github repository consists of the following file:
 1. ETL.py - This is the main code where the data is extracted, transformed and loaded into MySQL DB.
@@ -23,6 +23,26 @@ Business Questions:
 The required tables to answer the above questions are 'tracks', 'invoice_items', 'invoices', 'customers', 'albums', 'employees' and the database used is chinook.db (sqlite)
 
 The data extraction process involves connecting to an SQLite database and extracting data from specified tables using the extract_data function. For each specified table in desired_tables, a SQL query is constructed to retrieve all data from that table. The extract_data function returns a dictionary (dataframes) containing Pandas DataFrames for each specified table, where the keys are table names and values are corresponding DataFrames.
+
+# Task 2.2 - Data Transformation/Cleaning
+
+Customer Table:
+- First names, last names, and city names in the Customers table are processed using unidecode to handle any diacritics or special characters.
+- Phone numbers are cleaned by removing parentheses, spaces, and hyphens.
+- Unnecessary columns ('Company', 'State', 'Fax') are dropped.
+
+Employees Table:
+- The 'BirthDate' and 'HireDate' columns are converted to the date format from timestamp format.
+- Phone and fax numbers are formatted to include a '+' if not present at the beginning to maintain the consistency.
+
+Tracks Table:
+- Unnecessary columns ('Milliseconds', 'Bytes', 'Composer', 'MediaTypeId', 'GenreId') in the Tracks table are dropped.
+
+Invoice and Album Table:
+- The 'ArtistId' column in the Albums table is dropped, no need of it since the artist table is not extracted.
+- The 'InvoiceDate' column is converted to the date format.
+
+  
 
 
 
