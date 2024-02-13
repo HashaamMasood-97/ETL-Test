@@ -3,6 +3,7 @@ import pandas as pd
 from unidecode import unidecode
 from sqlalchemy import create_engine
 from safety import hashed_password
+from sqlalchemy.exc import SQLAlchemyError
 
 def extract_data(db_path, tables):
     conn = sqlite3.connect(db_path)
@@ -54,12 +55,16 @@ def transform_data(dataframes):
     return dataframes
 
 def load_data(dataframes, mysql_user, password, mysql_host, mysql_db, port):
-    mysql_engine = create_engine(f'mysql+pymysql://{mysql_user}:{password}@{mysql_host}:{port}/{mysql_db}')
+    try:
+        mysql_engine = create_engine(f'mysql+pymysql://{mysql_user}:{password}@{mysql_host}:{port}/{mysql_db}')
 
-    for table, df in dataframes.items():
-        df.to_sql(name=table, con=mysql_engine, index=False, if_exists='replace')
+        for table, df in dataframes.items():
+            df.to_sql(name=table, con=mysql_engine, index=False, if_exists='replace')
 
-    mysql_engine.dispose()
+        mysql_engine.dispose()
+
+    except SQLAlchemyError as e:
+        print(f"Error during database connection or data loading: {e}")
 
 def main():
     sqlite_db_path = 'chinook.db'
