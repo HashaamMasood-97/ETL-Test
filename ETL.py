@@ -2,7 +2,6 @@ import sqlite3
 import pandas as pd
 from unidecode import unidecode
 from sqlalchemy import create_engine
-from safety import hashed_password
 from sqlalchemy.exc import SQLAlchemyError
 
 def extract_data(db_path, tables):
@@ -78,7 +77,7 @@ def main():
 
     # Load data into MySQL
     mysql_user = 'root'
-    password = hashed_password
+    password = 'Mm%406676363'
     mysql_host = '127.0.0.1'
     mysql_db = 'etl'
     port = '3306'
