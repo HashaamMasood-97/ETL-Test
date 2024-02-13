@@ -43,8 +43,6 @@ def transform_data(dataframes):
 
     # Invoice table transformation
     df_invoices = dataframes['invoices']
-    columns_to_drop = ['BillingState', 'BillingPostalCode']
-    df_invoices = df_invoices.drop(columns=columns_to_drop)
     df_invoices['InvoiceDate'] = pd.to_datetime(df_invoices['InvoiceDate']).dt.date
     dataframes['invoices'] = df_invoices
 
