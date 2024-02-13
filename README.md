@@ -18,6 +18,8 @@ Business Questions:
 4. What is the cumulative revenue generated from sales in the top 10 countries?
 5. What is the sales trend observed for each month across multiple years?
 
+The code contains 4 functions extract_data,transform_data, load_data and main.
+
 # Task 2.1 - Data Extraction
 
 The required tables to answer the above questions are 'tracks', 'invoice_items', 'invoices', 'customers', 'albums', 'employees' and the database used is chinook.db (sqlite)
@@ -41,6 +43,36 @@ Tracks Table:
 Invoice and Album Table:
 - The 'ArtistId' column in the Albums table is dropped, no need of it since the artist table is not extracted.
 - The 'InvoiceDate' column is converted to the date format.
+
+# Task 2.3 - Data Loading
+
+The loading process involves taking the transformed dataframes and loading them into a MySQL database. 
+Established a connection to the MySQL database using SQLAlchemy's create_engine method. 
+Iterate through each table in the transformed dataframes. Use the to_sql method to write each dataframe to the corresponding MySQL table. 
+The if_exists='replace' parameter ensures that if the table already exists in the MySQL database, it will be replaced.
+The password of database is hashed and it is being called from another python script, that is not being up uploaded on github as per the task instructions.
+The screenshot of the MySql db is stored inside the mysql screenshot folder.
+A try catch block is executed to catch the connection error exception. 
+
+# Task 2.4 - Data Modelling
+
+This part is being done in the data modelling.xlsx file.
+
+# Task 2.5 - Dashboarding
+
+The tool used for dashboarding is microsoft power bi. The sale_analytics.pbix file and the dashboard screenshot is stored inside the dashboard directory.
+Here all the above business questions are being answered by creating different charts and graphs.
+
+# Usage
+
+Run the ETL script etl.py using Python -> python etl.py
+
+
+
+
+
+
+
 
   
 
